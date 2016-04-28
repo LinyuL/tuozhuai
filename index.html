@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>鼠标拖拽</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<style>
+	body,ul,li{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	*{
+		box-sizing:border-box;
+	}
+	body,html{
+		width: 100%;
+		height:100%;
+	}
+	.box{
+		width:100%;
+		height:400px;
+	}
+	.inner{
+		width: 500%;
+		height: 100%;
+	}
+	.inner li{
+		width:20%;
+		height:100%;
+		float:left;
+		font-size: 100px;
+		color:#fff;
+		text-align: center;
+		line-height: 400px;
+	}
+	.inner li:first-child{
+		background: #38DD7F;
+	}
+	.inner li:nth-child(2){
+		background: #FCED0C;
+	}
+	.inner li:nth-child(3){
+		background: #F93617;
+	}
+	.inner li:nth-child(4){
+		background: #D23EF8;
+	}
+	.inner li:nth-child(5){
+		background: #4693F7;
+	}
+
+	</style>
+</head>
+<body>
+	<div class="box">
+		<ul class="inner">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+	</div>
+	<script>
+	var isTouch="ontouchstart" in window;
+/*	console.log(isTouch);
+	console.log(window);*/
+	if(isTouch){
+		var mousedown="touchstart";
+		var mousemove="touchmove";
+		var mouseup="touchend";
+	}else{
+		var mousedown="mousedown";
+		var mousemove="mousemove";
+		var mouseup="mouseup";
+	}
+
+	var box=document.querySelector(".box");
+	var inner=document.querySelector(".inner");
+	var lis=inner.querySelectorAll("li");
+	var iw=box.offsetWidth;
+	var i=0;
+	var movex=0;  //走到哪
+	inner.addEventListener(mousedown,function(e){
+		var stime=e.timeStamp;
+		var etime=0;	
+		e.preventDefault();
+		var e=isTouch?e.changedTouches[0]:e;
+		var dx=e.clientX;
+		var lengX;
+		var mx;
+		var dir;
+		inner.style.transition="none";
+		function moveS(e){
+			var e=isTouch?e.changedTouches[0]:e;
+			mx=e.clientX;
+			lengX=mx-dx;
+			dir=lengX>0?"right":"left";
+			inner.style.transform="translateX("+(movex+lengX)+"px)";
+		}
+		function upS(e){
+			var etime=e.timeStamp;
+			// var e=isTouch?e.changedTouches[0]:e;
+			var lenT=etime-stime;
+			if(Math.abs(lengX)>iw/2||(lenT<100&&Math.abs(lengX)>30)){
+				if(dir=="right"){
+					i--;
+				}else if(dir=="left"){
+					i++;
+				}
+				if(i<0){
+					i=0;
+				}
+				else if(i>lis.length-1){
+					i=lis.length-1;
+				}
+				movex=-i*iw;
+				inner.style.transition="transform .3s";
+				inner.style.transform="translateX("+movex+"px)";
+			}
+			else{
+				movex=-i*iw;
+				inner.style.transition="transform .3s";
+				inner.style.transform="translateX("+movex+"px)";
+			}
+
+			document.removeEventListener(mousemove,moveS);
+			document.removeEventListener(mousemove,upS);
+		}
+		document.addEventListener(mousemove,moveS);
+		document.addEventListener(mouseup,upS);
+		
+	})
+
+
+
+
+	</script>
+</body>
+</html>
