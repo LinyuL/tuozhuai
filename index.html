@@ -96,7 +96,7 @@
 			mx=e.clientX;
 			lengX=mx-dx;
 			// dir=lengX>0?"right":"left";
-			inner.style.webkitTransform="translateX("+(movex+lengX)+"px)";
+			inner.style.webkitTransform="translate3d("+(movex+lengX)+"px,0,0)";
 		}
 		function upS(e){
 			var etime=e.timeStamp;
@@ -123,12 +123,12 @@
 					}
 					movex=-i*iw;
 					inner.style.transition="transform .3s";
-					inner.style.webkitTransform="translateX("+movex+"px)";
+					inner.style.webkitTransform="translate3d("+movex+"px,0,0)";
 				}
 				else{
 					movex=-i*iw;
 					inner.style.transition="transform .3s";
-					inner.style.webkitTransform="translateX("+movex+"px)";
+					inner.style.webkitTransform="translate3d("+movex+"px,0,0)";
 				}
 			}
 			
