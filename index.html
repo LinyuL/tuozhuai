@@ -90,13 +90,13 @@
 		var lengX;
 		var mx;
 		var dir;
-		inner.style.webkitTransform="none";
+		inner.style.transition="none";
 		function moveS(e){
 			var e=isTouch?e.changedTouches[0]:e;
 			mx=e.clientX;
 			lengX=mx-dx;
 			// dir=lengX>0?"right":"left";
-			inner.style.transform="translateX("+(movex+lengX)+"px)";
+			inner.style.webkitTransform="translateX("+(movex+lengX)+"px)";
 		}
 		function upS(e){
 			var etime=e.timeStamp;
@@ -122,13 +122,13 @@
 						i=lis.length-1;
 					}
 					movex=-i*iw;
-					inner.style.webkitTransform="transform .3s";
-					inner.style.transform="translateX("+movex+"px)";
+					inner.style.transition="transform .3s";
+					inner.style.webkitTransform="translateX("+movex+"px)";
 				}
 				else{
 					movex=-i*iw;
-					inner.style.webkitTransform="transform .3s";
-					inner.style.transform="translateX("+movex+"px)";
+					inner.style.transition="transform .3s";
+					inner.style.webkitTransform="translateX("+movex+"px)";
 				}
 			}
 			
