@@ -90,7 +90,7 @@
 		var lengX;
 		var mx;
 		var dir;
-		inner.style.transition="none";
+		inner.style.webkitTransform="none";
 		function moveS(e){
 			var e=isTouch?e.changedTouches[0]:e;
 			mx=e.clientX;
@@ -122,12 +122,12 @@
 						i=lis.length-1;
 					}
 					movex=-i*iw;
-					inner.style.transition="transform .3s";
+					inner.style.webkitTransform="transform .3s";
 					inner.style.transform="translateX("+movex+"px)";
 				}
 				else{
 					movex=-i*iw;
-					inner.style.transition="transform .3s";
+					inner.style.webkitTransform="transform .3s";
 					inner.style.transform="translateX("+movex+"px)";
 				}
 			}
